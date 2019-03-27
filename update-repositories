@@ -1,0 +1,17 @@
+#!/bin/bash
+
+set -e
+
+update () {
+	if [ ! -d "$1" ]; then
+		git clone "git@github.com:emanuelcruzrodrigues/$1.git"
+	else
+		cd "$1"
+		pwd
+		git pull
+		cd ..
+	fi
+}
+
+update "oee"
+

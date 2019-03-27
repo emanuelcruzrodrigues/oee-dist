@@ -1,0 +1,32 @@
+#!/bin/bash
+set -e
+
+# update sources
+
+./update-repositories
+
+# unzip ant
+
+if [ ! -d "ant" ]; then
+  tar -zxvf ant.tar.gz 
+fi
+
+# clear old artifacts
+
+rm oee.war || true
+
+# run build
+
+deploy_dir="$PWD"
+
+JAVA_HOME=../jdk
+export JAVA_HOME
+
+ANT_HOME="$PWD/ant"
+export ANT_HOME
+
+./ant/bin/ant -buildfile oee/ivy/build.xml update-lib
+
+./ant/bin/ant -buildfile oee/build.xml -Ddeploy.dir=$deploy_dir deploy
+
+

@@ -1,0 +1,6 @@
+#!/bin/bash
+set -e
+
+rm -rf oee
+rm -rf ant
+rm -rf oee.war
